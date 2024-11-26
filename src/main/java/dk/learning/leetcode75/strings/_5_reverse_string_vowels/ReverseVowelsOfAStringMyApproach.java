@@ -14,15 +14,12 @@
  * @complexityanalysis Complexity Analysis
  *     <p>Here, N is the length of the string s.
  * @timecomplexity - Time complexity: O(N)
- *     <p>It might be tempting to say that there are two nested loops and hence the complexity would
- *     be O(N^2).
- *     <p>However, if we observe closely the pointers start and end will only traverse the index
- *     once. Each element of the string s will be iterated only once either by the left or right
+ *     <p>Each element of the string s will be iterated only once either by the left or right
  *     pointer and not both.
  *     <p>We swap characters when both pointers point to vowels which are O(1) operation. Hence the
  *     total time complexity will be O(N).
  *     <p>Note that in Java we need to convert the string to a char array as strings are immutable
- *     and hence it would take O(N)O(N)O(N) time.
+ *     and hence it would take O(N) time.
  * @spacecomplexity - Space complexity: O(N)
  *     <p>In C++ we only need an extra temporary variable to perform the swap and hence the space
  *     complexity is O(1). However, in Java, we need to convert the string to a char array that
@@ -33,10 +30,10 @@
  *     href="https://leetcode.com/problems/reverse-vowels-of-a-string/description/?envType=study-plan-v2&envId=leetcode-75">
  *     Reverse Vowels of a String </a>
  */
-package dk.learning.leetcode75.strings.reverse_string_vowels;
+package dk.learning.leetcode75.strings._5_reverse_string_vowels;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-public class ReverseVowelsOfAStringTwoPointersApproach {
+public class ReverseVowelsOfAStringMyApproach {
 
   public static void main(String[] args) {
 
@@ -50,16 +47,23 @@ public class ReverseVowelsOfAStringTwoPointersApproach {
   }
 
   public static String reverseVowels(String string) {
-
     int start = 0, end = string.length() - 1;
     char[] charArray = string.toCharArray();
 
     while (start < end) {
-      while (start < string.length() && !isVowel(charArray[start])) start++;
-      while (end >= 0 && !isVowel(charArray[end])) end--;
+
+      if (start < string.length() && !isVowel(charArray[start])) {
+        start++;
+        continue;
+      }
+
+      if (end >= 0 && !isVowel(charArray[end])) {
+        end--;
+        continue;
+      }
+
       if (start < end) swap(charArray, start++, end--);
     }
-
     return new String(charArray);
   }
 
